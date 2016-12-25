@@ -8,3 +8,4 @@ python宝典
     tutorial.rst
     important.rst
     skill.rst
+            pycharm.rst

@@ -1,15 +1,7 @@
+Python技巧 - 提升你的逼格
+--------
 
-Python技巧
------------
-
-真实案例
-~~~~
-
-
-|image86|
-
-|image87|
-
+**一些小技巧用来提升你的逼格！**
 
 下标循环迭代
 ~~~~~~
@@ -143,7 +135,7 @@ deepcopy(x, memo=None, _nil=[]) Deep copy operation on arbitrary Python objects.
 
 
 函数参数默认值的陷阱和原理深究
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 python中一切非基本类型对象都是引用
 ::
@@ -169,202 +161,176 @@ list_2在函数的第二次调用时并没有得到一个新的list并填入2，
 可见如果参数默认值是在函数编译compile阶段就已经被确定。
 之后所有的函数调用时，如果参数不显示的给予赋值，那么所谓的参数默认值不过是一个指向那个在compile阶段就已经存在的对象的指针。如果调用函数时，没有显示指定传入参数值得话。那么所有这种情况下的该参数都会作为编译时创建的那个对象的一种别名存在。如果参数的默认值是一个不可变(Imuttable)数值，那么在函数体内如果修改了该参数，那么参数就会重新指向另一个新的不可变值。而如果参数默认值是和本文最开始的举例一样，是一个可变对象(Muttable)，那么情况就比较糟糕了。所有函数体内对于该参数的修改，实际上都是对compile阶段就已经确定的那个对象的修改。
 
-** **\ 链式比较操作符
-~~~~~~~~~~~~~~~~~~~~~
+链式比较操作符
+~~~~~~~~~~~~
 
-1. x, y, z = 1,2,3
-
-2. %timeit -n 1000000 **if** x < y < z:\ **pass**
-
-3. %timeit -n 1000000 **if** x < y **and** y < z:\ **pass**
-
-4. 1000000 loops, best of 3: 101 ns per loop
-
-5. 1000000 loops, best of 3: 121 ns per loop
+使用链式比较更直观
+::
+    >>> x, y, z = 1,2,3
+    >>> %timeit -n 1000000 if x < y < z:pass
+    1000000 loops, best of 3: 101 ns per loop
+    >>> %timeit -n 1000000 if x < y and y < z:pass
+    1000000 loops, best of 3: 121 ns per loop
 
 x < y < z效率略高，而且可读性更好。
+
 
 带关键字的格式化
 ~~~~~~~~~~~~~~~~
 
-1. >>> **print** "Hello %(name)s !" % {'name': 'James'}
-
-2. Hello James !
-
-3. >>> **print** "I am years %(age)i years old" % {'age': 18}
-
-4. I am years 18 years old
+直接上例子：
+::
+    >>> print "Hello %(name)s !" % {'name': 'James'}
+    Hello James !
+    >>> print "I am years %(age)i years old" % {'age': 18}
+    I am years 18 years old
 
 更新些的格式化:
+::
+    >>> print "Hello {name} !".format(name="James")
+    Hello James !
 
-1. >>> **print** "Hello {name} !".format(name="James")
-
-2. Hello James !
 
 while 1 比 while True 更快
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+直接上例子:
+::
+    def while_1():
 
-1.  **def** while\_1():
+        n = 100000
+        while 1:
+            n -= 1
+            if n <= 0:break
 
-2.  n = 100000
+    def while_true():
+        n = 100000
+        while True:
+            n -= 1
+            if n <= 0:break
 
-3.  **while** 1:
+    m, n = 1000000, 1000000
+    %timeit -n 100 while_1()
+    %timeit -n 100 while_true()
 
-4.  n -= 1
+    # 100 loops, best of 3: 3.69 ms per loop
+    # 100 loops, best of 3: 5.61 ms per loop
 
-5.  **if** n <= 0: **break**
+while 1 比 while true 快很多，原因是在python2.x中，True是一个全局变量，而非关键字。
 
-6.  **def** while\_true():
-
-7.  n = 100000
-
-8.  **while** **True**:
-
-9.  n -= 1
-
-10. **if** n <= 0: **break**
-
-11.
-12. m, n = 1000000, 1000000
-
-13. %timeit -n 100 while\_1()
-
-14. %timeit -n 100 while\_true()
-
-15. 100 loops, best of 3: 3.69 ms per loop
-
-16. 100 loops, best of 3: 5.61 ms per loop
-
-while 1 比 while
-true快很多，原因是在python2.x中，True是一个全局变量，而非关键字。
-
-`***漂亮地打印JSON*** <http://pyzh.readthedocs.io/en/latest/improving-your-python-productivity.html#id8>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+漂亮地打印JSON
+~~~~~~~~~~~~
 
 JSON是一个很棒的序列格式，如今广泛应用在API和web服务中，但是很难用裸眼来看大数据量的JSON,它们很长，还在一行里。
 
-可以用参数 indent 来更好地打印JSON数据，这在跟
-REPL或是日志打交道的时候很有用:
+可以用参数 indent 来更好地打印JSON数据，这在跟REPL或是日志打交道的时候很有用:
+::
+    >>> import json
+    >>> print (json.dumps(data)) # No indention*
+    {"status": "OK", "count": 2, "results": [{"age": 27, "name": "Oz","lactose_intolerant": true}, {"age": 29, "name": "Joe","lactose_intolerant": false}]}
 
->>> **import** **json**
-
->>> **print**\ (json.dumps(data)) *# No indention*
-
-{"status": "OK", "count": 2, "results": [{"age": 27, "name": "Oz",
-"lactose\_intolerant": true}, {"age": 29, "name": "Joe",
-"lactose\_intolerant": false}]}
-
->>> **print**\ (json.dumps(data, indent=2)) *# With indention*
-
-{
-
-"status": "OK",
-
-"count": 2,
-
-"results": [
-
-{
-
-"age": 27,
-
-"name": "Oz",
-
-"lactose\_intolerant": true
-
-},
-
-{
-
-"age": 29,
-
-"name": "Joe",
-
-"lactose\_intolerant": false
-
-}
-
-]
-
-}
+    >>> print (json.dumps(data, indent=2)) # With indention*
+    {
+    "status": "OK",
+    "count": 2,
+    "results": [
+        {
+        "age": 27,
+        "name": "Oz",
+        "lactose_intolerant": true
+        },
+        {
+        "age": 29,
+        "name": "Joe",
+        "lactose_intolerant": false
+        }
+    ]
+    }
 
 另外，去看看内建模块 pprint , 它可以帮助你漂亮地输出其它的东西。
-
--  命令行上漂亮地打印JSON:
-
--  echo '{"json":"obj"}' \| python -mjson.tool
+命令行上漂亮地打印JSON:
+::
+    echo '{"json":"obj"}' | python -mjson.tool
 
 而且，如果你安装了 Pygments 模块，可以高亮地打印JSON:
+::
+    echo '{"json":"obj"}' | python -mjson.tool | pygmentize -l json
 
-echo '{"json":"obj"}' \| python -mjson.tool \| pygmentize -l json
-
--  注意 {} 是一个空的字典，而不是空的集合
+注意 {} 是一个空的字典，而不是空的集合
 
 其它
 ~~~~
 
-| **def main**\ (options):
-| # 字符串拼接
-| a\_list = ['a', 'b', 'c']
-| **print** '\\t'.join(a\_list)
-| **print** "%s\\t%d\\t%0.3f" % ('abc', 34, 45.67743)
-| # 判断None 用 is
-| m = None
-| **if** m **is** None **or** m **is not** None:
-| **print** m
-| # 字典默认值
-| v = {}
-| v['a'] = v.get('a', 0) + 1
-| # 字典迭代
-| **for** key, value **in** v.iteritems(): # itervalues() iterkeys()
-| **print** key, value
-| # 字符串前后缀
-| s = "prefix\_end"
-| **print** s.startswith("prefix"), s.endswith("end")
-| # 变量值交换
-| a = 1
-| b = 2
-| b, a = a, b
-| # 使用if isinstance(obj, int): 而不是 if type(obj) is type(1):
-| **print** isinstance('3', str)
-| # xrange range
-| **print** type(xrange(1, 10)), type(range(1, 10))
-| # 字符串换行
-| a = ("erqwrfdsftrettrret"
-| "dsfdafdsfdsfd")
-| **print** a
+字符串拼接
+::
+    a_list = ['a', 'b', 'c']
+    print '\t'.join(a_list)
+    print "%s\t%d\t%0.3f" % ('abc', 34, 45.67743)
 
-`*python内置函数大全* <http://jianfeihit.iteye.com/blog/1835272>`__
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+判断None 用 is
+::
+    m = None
+    if m is None or m is not None:
+        print m
+
+字典默认值
+::
+    v = {}
+    v['a'] = v.get('a', 0) + 1
+
+字典迭代
+::
+    for key, value in v.iteritems(): # itervalues() iterkeys()
+        print key, value
+字符串前后缀判断
+::
+    s = "prefix_end"
+    print s.startswith("prefix"), s.endswith("end")
+变量值交换
+::
+    a = 1
+    b = 2
+    b, a = a, b
+使用if isinstance(obj, int): 而不是 if type(obj) is type(1):
+::
+    print isinstance('3', str)
+
+用xrange替代range
+::
+    print type(xrange(1, 10)), type(range(1, 10))
+
+字符串换行
+::
+    a = ("erqwrfdsftrettrret"
+        "dsfdafdsfdsfd")
+    print a
+
+python内置函数大全
+~~~~~~~~~~~~~~~~
 
 http://jianfeihit.iteye.com/blog/1835272
+
 
 其它学习资料
 ~~~~~~~~~~~~
 
-`*http://litaotao.github.io/python-materials* <http://litaotao.github.io/python-materials>`__
 
-`*http://blog.jobbole.com/51062/* <http://blog.jobbole.com/51062/>`__
+`Python 调试工具 <http://blog.jobbole.com/51062/>`__
 
-*http://python.jobbole.com/category/basic/*
+`Python包、模块、类以及代码文件和目录的一种管理方案 <http://python.jobbole.com/86376/>`__
 
-`***Python
-包、模块、类以及代码文件和目录的一种管理方案*** <http://python.jobbole.com/86376/>`__
+`Python第三方库安装及常见问题 <http://python.jobbole.com/86397/>`__
 
-`***Python第三方库安装及常见问题*** <http://python.jobbole.com/86397/>`__
+`一分钟让你的程序支持队列和并发 <http://python.jobbole.com/86459/>`__
 
-`***一分钟让你的程序支持队列和并发*** <http://python.jobbole.com/86459/>`__
+`python unicode 编码整理 <http://python.jobbole.com/86670/>`__
 
-`***python unicode 编码整理*** <http://python.jobbole.com/86670/>`__
+`一行python代码 <http://python.jobbole.com/86678/>`__
 
-`***一行python代码*** <http://python.jobbole.com/86678/>`__
+`由一个例子到python的名字空间 <http://python.jobbole.com/86655/>`__
 
-`***由一个例子到python的名字空间*** <http://python.jobbole.com/86655/>`__
+`Python 二分查找与 bisect模块 <http://python.jobbole.com/86609/>`__
 
-`***Python 二分查找与 bisect
-模块*** <http://python.jobbole.com/86609/>`__
+`PYTHON编码的前世今生 <http://python.jobbole.com/86578/>`__
 
-`***PYTHON编码的前世今生*** <http://python.jobbole.com/86578/>`__
-
-`***python supervisor使用*** <http://python.jobbole.com/86423/>`__
+`python supervisor使用 <http://python.jobbole.com/86423/>`__
 

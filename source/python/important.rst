@@ -1,5 +1,7 @@
-Python必读
+Python必读 - pythoner合格证
 --------
+
+**本文内容不会，不要说你是pythoner!**
 
 
 一切变量都是引用
@@ -137,4 +139,11 @@ Python在heap中分配的对象分成两类：可变对象和不可变对象。�
     >>> print a,b,id(a),id(b) # a 和 b 指向的仍然是原来的对象，并且其值发生了改变
     [1, 3, 4, 5] [1, 3, 4, 5] 139799778290504 139799778290504
 
+
+
+
+python正则表达式
+~~~~~~~~
+
+`*http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html* <http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html>`__
 
