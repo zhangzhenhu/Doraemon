@@ -1,10 +1,4 @@
 
-Linux常用命令
--------------
-
-命令手册
-
-`*http://www.runoob.com/linux/linux-command-manual.html* <http://www.runoob.com/linux/linux-command-manual.html>`__
 
 权限处理
 ~~~~~~~~

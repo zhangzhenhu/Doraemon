@@ -18,6 +18,8 @@ Linux常用命令
 
 
 
-本文部分内容来自：
+
+
+本文部分内容来自 linux命令手册：
 
 `*http://www.runoob.com/linux/linux-command-manual.html* <http://www.runoob.com/linux/linux-command-manual.html>`__
