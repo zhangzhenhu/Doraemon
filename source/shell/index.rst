@@ -14,7 +14,6 @@ Linux常用命令
     task.rst
     system.rst
     net.rst
-    other.rst
 
 
 
