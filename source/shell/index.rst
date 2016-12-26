@@ -12,8 +12,8 @@ Linux常用命令
     file.rst
     compress.rst
     task.rst
-    system.rst
     net.rst
+    system.rst
 
 
 
