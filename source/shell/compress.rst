@@ -19,24 +19,29 @@ tar命令常用来 **打包并且压缩** 文件。
 
 打包命令：
 ::
+
     tar -cf out_filename.tar file1 file2
 
 
 解包命令：
 ::
+
     tar -xf out_filename.tar
 
 
 打包的同时用指定压缩算法压缩数据：
 ::
+
     tar -czf out_filename.tar.gz file1 file2
 
 解包的同时用指定压缩算法解压数据：
 ::
+
     tar -xzf out_filename.tar.gz file1 file2
 
 压缩算法参数：
 ::
+
     -z 使用gzip压缩算法
     -j, --bzip2   使用bzip2压缩算法
     -J, --xz      使用xz压缩算法
@@ -60,6 +65,7 @@ gzip
 
 用法：
 ::
+
     Usage: gzip [OPTION]... [FILE]...
     Compress or uncompress FILEs (by default, compress FILES in-place).
 
@@ -106,6 +112,7 @@ zip/unzip
 
 用法：
 ::
+
     Usage: zip [-options] [-b path] [-t mmddyyyy] [-n suffixes] [zipfile list] [-xi list]
       The default action is to add or replace zipfile entries from list, which
       can include the special name - to compress standard input.

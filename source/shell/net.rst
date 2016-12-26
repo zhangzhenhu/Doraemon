@@ -22,6 +22,7 @@ wget
 
 常见用法：
 ::
+
     wget -O taglist.zip http://www.vim.org/scripts/download\_script.php?src\_id=7701
 
 当用来从互联网下载网页或者数据时，很简单，就用上面的方式即可。

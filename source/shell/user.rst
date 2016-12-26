@@ -30,6 +30,7 @@ linux下的每个文件（夹）都必有一个所有者（用户），一般是
 
 第一列的含义：
 ::
+
     - 第一个字符代表是文件（-）、目录（d）、链接（l）
 
     - 其余字符每3个一组（rwx），读（r）、写（w）、执行（x）
@@ -42,6 +43,7 @@ linux下的每个文件（夹）都必有一个所有者（用户），一般是
 
 第三四列的含义：
 ::
+
     - 第三列是当前文件（夹）的所有者用户名称
     - 第四列是当前文件（夹）的所有者所属的用户组名称
 
@@ -65,11 +67,13 @@ chown - 更改文件所有者
 
 语法:
 ::
+
     chown [-cfhvR] [--help] [--version] user[:group] file...
 
 
 参数:
 ::
+
     user : 新的文件拥有者的使用者 ID
     group : 新的文件拥有者的使用者群体(group)
     -c : 若该文件拥有者确实已经更改，才显示其更改动作
@@ -85,9 +89,12 @@ chown - 更改文件所有者
 
 将文件 file1.txt 的拥有者设为 users 群体的使用者 jessie :
 ::
+
     chown jessie:users file1.txt
+
 将目前目录下的所有文件与子目录的拥有者皆设为 users 群体的使用者 lamport :
 ::
+
     chmod -R lamport:users *
 
 
@@ -99,11 +106,13 @@ Linux chgrp命令用于变更文件或目录的所属群组。
 
 语法:
 ::
+
     chgrp [-cfhRv][--help][--version][所属群组][文件或目录...]
     或 chgrp [-cfhRv][--help][--reference=<参考文件或目录>][--version][文件或目录...]
 
 参数说明:
 ::
+
     -c或--changes 效果类似"-v"参数，但仅回报更改的部分。
     -f或--quiet或--silent 　不显示错误信息。
     -h或--no-dereference 　只对符号连接的文件作修改，而不更动其他任何相关文件。
@@ -118,9 +127,12 @@ Linux chgrp命令用于变更文件或目录的所属群组。
 
 改变文件的群组属性：
 ::
+
     chgrp -v bin log2012.log
+
 输出：
 ::
+
     [root@localhost test] ll
     ---xrw-r-- 1 root root 302108 11-13 06:03 log2012.log
     [root@localhost test] chgrp -v bin log2012.log
@@ -137,10 +149,12 @@ chmod - 更改文件权限
 
 语法：
 ::
+
     chmod [-cfvR] [--help] [--version] mode file...
 
 参数说明:
 ::
+
     mode : 权限设定字串，格式: [ugoa...][[+-=][rwxX]...][,...]
     其中：
         - u 表示该文件的拥有者，g 表示与该文件的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。
@@ -157,30 +171,37 @@ chmod - 更改文件权限
 
 将文件 file1.txt 设为所有人皆可读取 :
 ::
+
     chmod ugo+r file1.txt
 
 将文件 file1.txt 设为所有人皆可读取 :
 ::
+
     chmod a+r file1.txt
 
 将文件 file1.txt 与 file2.txt 设为该文件拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入 :
 ::
+
     chmod ug+w,o-w file1.txt file2.txt
 
 将 ex1.py 设定为只有该文件拥有者可以执行 :
 ::
+
     chmod u+x ex1.py
 
 将目前目录下的所有文件与子目录皆设为任何人可读取 :
 ::
+
     chmod -R a+r *
 
 此外chmod也可以用数字来表示权限如 :
 ::
+
     chmod 777 file
 
 语法为：
 ::
+
     chmod abc file
     其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。
     **r=4，w=2，x=1**

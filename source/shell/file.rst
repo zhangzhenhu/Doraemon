@@ -23,10 +23,12 @@ grep指令用于查找内容包含指定的范本样式的文件，
 
 语法:
 ::
+
     grep [-abcEFGhHilLnqrsvVwxy][-A<显示列数>][-B<显示列数>][-C<显示列数>][-d<进行动作>][-e<范本样式>][-f<范本文件>][--help][范本样式][文件或目录...]
 
 参数：
 ::
+
     -a或--text 不要忽略二进制的数据。
     -A<显示列数>或--after-context=<显示列数> 除了显示符合范本样式的那一列之外，并显示该列之后的内容。
     -b或--byte-offset 在显示符合范本样式的那一列之前，标示出该列第一个字符的位编号。
@@ -58,10 +60,13 @@ grep指令用于查找内容包含指定的范本样式的文件，
 
 .. image:: media/image062.png
     :align: center
+
 .. image:: media/image063.png
     :align: center
+
 .. image:: media/image064.png
     :align: center
+
 .. image:: media/image065.png
     :align: center
 
@@ -86,10 +91,12 @@ Sed主要用来自动编辑一个或多个文件；简化对文件的反复操�
 
 语法
 ::
+
     sed [-hnV][-e<script>][-f<script文件>][文本文件]
 
 参数说明：
 ::
+
     -e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
     -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
     -h或--help 显示帮助。
@@ -115,6 +122,7 @@ iconv - 转换文件编码
 
 语法：
 ::
+
     Usage: iconv [OPTION...] [FILE...]
     Convert encoding of given files from one encoding to another.
 
@@ -214,10 +222,12 @@ Linux tree命令用于以树状图列出目录的内容。
 
 语法
 ::
+
     tree [-aACdDfFgilnNpqstux][-I <范本样式>][-P <范本样式>][目录...]
 
 参数说明：
 ::
+
     -a 显示所有文件和目录。
     -A 使用ASNI绘图字符显示树状图而非以ASCII字符组合。
     -C 在文件和目录清单加上色彩，便于区分各种类型。
@@ -275,6 +285,7 @@ Linux df命令用于显示目前在Linux系统上的文件系统的磁盘使用�
 
 语法
 ::
+
     df [选项]... [FILE]...
     -a, --all 包含所有的具有 0 Blocks 的文件系统
     --block-size={SIZE} 使用 {SIZE} 大小的 Blocks
@@ -316,9 +327,12 @@ du会显示指定的目录或文件所占用的磁盘空间。
 
 语法
 ::
+
     du [-abcDhHklmsSx][-L <符号连接>][-X <文件>][--block-size][--exclude=<目录或文件>][--max-depth=<目录层数>][--help][--version][目录或文件]
+
 参数说明：
 ::
+
     -a或-all 显示目录中个别文件的大小。
     -b或-bytes 显示目录或文件大小时，以byte为单位。
     -c或--total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。

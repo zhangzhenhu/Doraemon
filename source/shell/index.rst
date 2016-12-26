@@ -6,15 +6,15 @@ Linux常用命令
 **作为一名RD，linux下的各类命令就像武者手中的十八般兵器，只有样样精通才能打好每一仗。**
 
 .. toctree::
-    :maxdepth: 2
+:maxdepth: 1
 
     user.rst
     file.rst
     compress.rst
-            task.rst
-            system.rst
+        task.rst
+        system.rst
     net.rst
-            other.rst
+        other.rst
 
 
 

@@ -77,9 +77,9 @@ windows版本安装完成后有三个工具
 
 git在安装后初次使用前，需要配置开发者的信息，包含开发者的邮件和名称。这是为了当多个开发者协作开发时，能够区分出不同开发者修改的内容。
 ::
+
     git config --global user.email "you@example.com"
     git config --global user.name "Your Name"
-
 
 .. image:: media/image007.png
     :align: center
@@ -129,6 +129,7 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 
 从远程库拉取代码使用命令 ``git clone``
 ::
+
     usage: git clone [<options>] [--] <远程库地址> [保存路径]
 
     clone 代表从远程库复制
@@ -153,6 +154,7 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 
 我们分析一下这条命令的组成
 ::
+
     git
     clone
     https://<你的效率云登陆账号>@xiaolvyun.baidu.com/git/waimai/uprofile/basic-data  # 代码库地址
@@ -196,6 +198,7 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 
 运行 ``git remote add <shortname> <url>`` 为当前本地代码库添加一个新的远程Git仓库，同时指定一个名称
 ::
+
     $ git remote -v  # 当前只有一个远程库，名字是origin
 
     origin https://github.com/schacon/ticgit (fetch)
@@ -221,6 +224,7 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 
 查看当前代码库所绑定的远程仓库，可以运行 ``git remote -v`` 命令，如果你的远程仓库不止一个，该命令会将它们全部列出。
 ::
+
     $ git remote -v
 
     origin http://zhangzhenhu_iwaimai.baidu.com_waimai@xiaolvyun.baidu.com/git/waimai/uprofile/basic-data (fetch)
@@ -232,6 +236,7 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 如果想要查看某一个远程仓库的更多信息，可以使用 ``git remote show [remote-name]`` 命令。 
 如果想以一个特定的缩写名运行这个命令，例如 origin，会得到像下面类似的信息：
 ::
+
     $ git remote show origin
     Password for 'http://zhangzhenhu_iwaimai.baidu.com_waimai@xiaolvyun.baidu.com':
     * remote origin
@@ -271,14 +276,11 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 如果想要重命名引用的名字可以运行  ``git remote rename``  去修改一个远程仓库的简写名。 
 例如，想要将 name1 重命名为 name2
 ::
+
     $ git remote rename name1 name2
-
     $ git remote
-
     origin
-
     name2
-
 
 .. important::
 
@@ -288,10 +290,9 @@ git和svn不同的地方就在于，svn会在项目每个子目录下都生成�
 
 如果因为一些原因想要移除一个远程仓库，可以使用 ``git remote rm``
 ::
+
     $ git remote rm name2
-
     $ git remote
-
     origin
 
 
@@ -402,6 +403,7 @@ Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的�
 
 提交命令的说明
 ::
+
     git add <path>
 
         | 表示 add to index only files created or modified and not those
@@ -453,6 +455,7 @@ Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的�
 
 你可以发现，Git会告诉你，git checkout -- file可以丢弃 **工作区** 的修改：
 ::
+
     $ git checkout -- readme.txt
 
 命令git checkout --
@@ -488,6 +491,7 @@ git本地库和远程库通信的协议有两种：
 .. image:: media/image020.png
 
 - http(s) 协议
+
 .. image:: media/image024.png
 
 
@@ -509,6 +513,7 @@ ssh协议
     在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id\_rsa和id\_rsa.pub这两个文件。
     如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
     ::
+
         $ ssh-keygen -t rsa -C "youremail@example.com"
 
     你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。
@@ -545,6 +550,7 @@ ssh协议
 http(s)协议
 
     公司的效率云目前仅支持http(s)的方式，不支持ssh，并且在开发机、测试机要把https改成http，window机器无需更改。
+
 .. image:: media/xiaolvyun_url.png
     :align: center
 
@@ -569,14 +575,17 @@ http(s)的认证很简单，就是每次和远程库交互时要输入密码（u
 
 如果尚未绑定远程库
 ::
+
     $ git push ssh://git@dev.lemote.com/rt4ls.git master
 
 如果已经绑定了远程库
 ::
+
     $ git push origin master # origin代表已绑定远程库的名字 master代表提交到远程库的分支名字
 
 上面的命令省略了本地分支名字，完整的命令形式是
 ::
+
   $ git push origin test:master   # 提交本地test分支 到远程库origin的master分支
   $ git push origin test:test    # 提交本地test分支 到远程库origin的test分支
 
@@ -606,18 +615,22 @@ http(s)的认证很简单，就是每次和远程库交互时要输入密码（u
 
 它的完整格式稍稍有点复杂。
 ::
+
     $ git pull <远程库名字> <远程分支名>:<本地分支名>
 
 比如，取回origin主机的next分支，与本地的master分支合并，需要写成下面这样。
 ::
+
     $ git pull origin next:master
 
 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。
 ::
+
     $ git pull origin next
 
 更简单点，拉取当前分支对应的远程分支，并且更新到当前分支
 ::
+
     $ git pull
 
 
@@ -763,19 +776,20 @@ Topic分支是从稳定的Merge分支创建的。完成作业后，要把Topic�
 
 您可以通过branch命令来创建分支。
 ::
+
     $ git branch <branchname>
 
 创建名为issue1的分支。
 ::
+
     $ git branch issue1
 
 不指定参数直接执行branch命令的话，可以显示分支列表。
 前面有\*的就是现在的分支。
 ::
+
     $ git branch
-
     issue1
-
     * master
 
 目前的历史记录是这样的。
@@ -829,10 +843,12 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 
 要执行checkout命令以退出分支。
 ::
+
     $ git checkout <branch name>
 
 切换到issue1分支。
 ::
+
     $ git checkout issue1
 
     Switched to branch 'issue1'
@@ -849,6 +865,7 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 
 在checkout命令指定 -b选项执行，可以创建新分支并进行切换。
 ::
+
     $ git checkout -b <new local branch name> <remote branch name>
 
 
@@ -877,12 +894,14 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 
 假设你现在基于远程分支"origin"，创建一个叫"mywork"的分支。
 ::
+
     $ git checkout -b mywork origin
 
 .. image:: media/image033.png
 
 现在我们在这个分支做一些修改，然后生成两个提交(commit).
 ::
+
     $ vi file.txt
 
     $ git commit
@@ -912,6 +931,7 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 
 但是，如果你想让"mywork"分支历史看起来像没有经过任何合并一样，你也许可以用 `git rebase` :
 ::
+
     $ git checkout mywork
 
     $ git rebase origin
@@ -937,6 +957,7 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 冲突；在解决完冲突后，用"git-add"命令去更新这些内容的索引(index),
 然后，你无需执行 git-commit,只要执行:
 ::
+
     $ git rebase --continue
 
 这样git会继续应用(apply)余下的补丁。
@@ -944,6 +965,7 @@ git内部维护着一个指针变量 `HEAD` ，这个 `HEAD` **指向的是当�
 在任何时候，你可以用--abort参数来终止rebase的行动，并且"mywork"
 分支会回到rebase开始前的状态。
 ::
+
     $ git rebase --abort
 
 
@@ -973,6 +995,7 @@ Reset
 在提交层面上，reset实际是操作移动 `HEAD` 指针，将一个分支的末端指向另一个提交。
 这可以用来移除当前分支的一些提交。比如，下面这两条命令让hotfix分支向后回退了两个提交。
 ::
+
     $ git checkout hotfix
 
     $ git reset HEAD~2
@@ -1020,6 +1043,7 @@ checkout命令的主要功能：用缓存区或者版本库中快照覆盖你的
 
 你应该已经非常熟悉提交层面的 `git checkout` 。当传入分支名时，可以切换到那个分支。
 ::
+
     $ git checkout hotfix
 
 上面这个命令做的不过是将HEAD移到一个新的分支，然后更新工作目录。
@@ -1044,6 +1068,7 @@ Revert
 Revert撤销一个提交的同时会创建一个新的提交。这是一个安全的方法，因为它不会重写提交历史。
 比如，下面的命令会找出倒数第二个提交，然后创建一个新的提交来撤销这些更改，然后把这个提交加入项目中。
 ::
+
     $ git checkout hotfix
 
     $ git revert HEAD~2
@@ -1073,6 +1098,7 @@ Reset
 当检测到文件路径时，`git reset` 将缓存区同步到你指定的那个提交。
 比如，下面这个命令会将倒数第二个提交中的foo.py加入到缓存区中，供下一个提交使用。
 ::
+
     $ git reset HEAD~2 foo.py
 
 和提交层面的 `git reset` 一样，通常我们使用 `HEAD` 而不是某个特定的提交。
@@ -1088,12 +1114,13 @@ Checkout一个文件和带文件路径 `git reset` 非常像，\ **但它更改
 
 比如，下面这个命令将工作目录中的foo.py同步到了倒数第二个提交中的foo.py。
 ::
+
     $ git checkout HEAD~2 foo.py
 
 和提交层面相同的是，它可以用来检查项目的旧版本，但作用域被限制到了特定文件。
 
 如果你缓存并且提交了checkout的文件，它具备将某个文件回撤到之前版本的效果。
-\ **注意它撤销了这个文件后面所有的更改，而git revert 命令只撤销某个特定提交的更改。**
+**注意它撤销了这个文件后面所有的更改，而git revert 命令只撤销某个特定提交的更改。**
 
 和 `git reset` 一样，这个命令通常和 `HEAD` 一起使用。
 比如 `git checkout HEAD foo.py` 等同于舍弃foo.py没有缓存的更改。
