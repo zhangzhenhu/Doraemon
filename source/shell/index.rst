@@ -11,8 +11,10 @@ Linux常用命令
     user.rst
     file.rst
     compress.rst
-    disk.rst
+            task.rst
+            system.rst
     net.rst
+            other.rst
 
 
 

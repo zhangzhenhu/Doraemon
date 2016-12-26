@@ -51,17 +51,6 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.redirect("/index.html")
-
-
-class StaticHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.u
-        self.write(open("index.html").read())
-
-
 def main():
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
